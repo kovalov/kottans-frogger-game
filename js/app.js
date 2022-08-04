@@ -5,19 +5,25 @@ class Enemy {
     this.x = x;
     this.y = y;
     this.speedX = speedX;
-    this.player = player;
   }
 
-  checkCollision() {}
+  checkCollision() {
+    if (
+      this.y + 83 > player.y &&
+      player.x < this.x + 101 &&
+      player.x > this.x - 101
+    )
+      player.resetPosition();
+  }
 
   update(dt) {
+    this.checkCollision();
+
     if (this.x >= this.fieldWidth) {
       this.x = 0;
     }
 
     this.x += dt * this.speedX;
-
-    this.checkCollision();
   }
 
   render() {
@@ -65,7 +71,7 @@ class Player {
     }
   }
 
-  setDefault() {
+  resetPosition() {
     this.x = this.fieldWidth / 2;
     this.y = this.fieldHeight;
   }
@@ -76,6 +82,8 @@ const playerConfiguration = {
   fieldHeight: 375,
   speedY: 80,
   speedX: 100,
+  //   charHeight: 83,
+  //   charWidth: 101,
 };
 
 const player = new Player(playerConfiguration);
