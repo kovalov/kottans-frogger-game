@@ -1,7 +1,7 @@
 class Enemy {
   constructor({ x, y, speedX, fieldWidth, player }) {
-    this.sprite = 'images/enemy-bug.png';
-    this.fieldWidth = fieldWidth;
+    this.sprite = "images/enemy-bug.png";
+    this.fieldWidth = fieldWidth + 100;
     this.x = x;
     this.y = y;
     this.speedX = speedX;
@@ -25,7 +25,7 @@ class Enemy {
     this.checkCollision();
 
     if (this.x >= this.fieldWidth) {
-      this.x = 0;
+      this.x = -100;
     }
 
     this.x += dt * this.speedX;
@@ -38,7 +38,7 @@ class Enemy {
 
 class Player {
   constructor({ fieldWidth, fieldHeight, speedX, speedY }, score) {
-    this.sprite = 'images/char-boy.png';
+    this.sprite = "images/char-boy.png";
     this.fieldWidth = fieldWidth;
     this.fieldHeight = fieldHeight;
     this.x = this.fieldWidth / 2;
@@ -63,19 +63,19 @@ class Player {
 
   handleInput(key) {
     switch (key) {
-      case 'left':
+      case "left":
         if (this.x > 0) this.x -= this.speedX;
         break;
 
-      case 'up':
+      case "up":
         if (this.y > 0) this.y -= this.speedY;
         break;
 
-      case 'right':
+      case "right":
         if (this.x < this.fieldWidth) this.x += this.speedX;
         break;
 
-      case 'down':
+      case "down":
         if (this.y < this.fieldHeight) this.y += this.speedY;
         break;
 
@@ -108,12 +108,12 @@ const playerConfiguration = {
   speedX: 100,
 };
 
-const score = new Score(document.querySelector('.score__number'));
+const score = new Score(document.querySelector(".score__number"));
 
 const player = new Player(playerConfiguration, score);
 
 const enemy1Configuration = {
-  x: 0,
+  x: -100,
   y: 50,
   speedX: 80,
   fieldWidth: 400,
@@ -121,7 +121,7 @@ const enemy1Configuration = {
 };
 
 const enemy2Configuration = {
-  x: 0,
+  x: -100,
   y: 135,
   speedX: 100,
   fieldWidth: 400,
@@ -129,7 +129,7 @@ const enemy2Configuration = {
 };
 
 const enemy3Configuration = {
-  x: 0,
+  x: -100,
   y: 215,
   speedX: 120,
   fieldWidth: 400,
@@ -144,13 +144,13 @@ const allEnemies = [
 
 function handleClick(e) {
   const allowedKeys = {
-    37: 'left',
-    38: 'up',
-    39: 'right',
-    40: 'down',
+    37: "left",
+    38: "up",
+    39: "right",
+    40: "down",
   };
 
   player.handleInput(allowedKeys[e.keyCode]);
 }
 
-document.addEventListener('keyup', handleClick);
+document.addEventListener("keyup", handleClick);
